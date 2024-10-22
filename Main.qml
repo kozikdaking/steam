@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Controls
 
-Window {
+ApplicationWindow {
     id:window
     width: 1900
     height: 1000
@@ -19,12 +19,7 @@ Window {
         height: parent.height * 0.080
         color: "#141c24"
 
-        Image {
-            id: leftArrow
-            source: "assets/notifications.png"
-            anchors.top: topBar.bottom
-            anchors.left: parent.left
-        }    
+
 //---------------------------------------------------------EXIT-------------------------------------------------------
         Row
         {           
@@ -304,7 +299,7 @@ Window {
 
         Button {
             id: steam
-            text: "Steam"
+            text:"Steam"
             font.pointSize: 10
             background: null
             onClicked: settingsPopup.open()
@@ -700,13 +695,227 @@ Window {
 
     //------------------------------------------------EVENT------------------------------------------------
 
-    Image {
-        id: event
-        source: "assets/mid.png"
-        width: parent.width
-        anchors.top: topBar.bottom
+
+
+    Row
+    {
+        x:480
+        y:120
+        Button
+        {
+            id:twojsklep
+            height:34
+            width:twojsklepimage.width
+
+            Image{
+
+            id:twojsklepimage
+            source:twojsklepArea.containsMouse?"assets/twojsklepanimated":"assets/twojsklep"
+
+            }
+
+            MouseArea
+            {
+               id:twojsklepArea
+               cursorShape: Qt.PointingHandCursor
+               anchors.fill: parent
+               hoverEnabled: true
+            }
+        }
+        Button
+        {
+            id:noweiwarteuwagi
+            height:34
+            width:noweiwarteimage.width
+
+            Image{
+
+            id:noweiwarteimage
+            source:noweiwarteimageArea.containsMouse?"assets/noweiwarteanimated":"assets/noweiwarte"
+
+            }
+
+            MouseArea
+            {
+               id:noweiwarteimageArea
+               cursorShape: Qt.PointingHandCursor
+               anchors.fill: parent
+               hoverEnabled: true
+            }
+
+        }
+        Button
+        {
+            id:kategorie
+            height:34
+            width:kategorieimage.width
+
+            Image{
+
+            id:kategorieimage
+            source:kategorieArea.containsMouse?"assets/kategorieanimated":"assets/kategorie"
+
+            }
+
+            MouseArea
+            {
+               id:kategorieArea
+               cursorShape: Qt.PointingHandCursor
+               anchors.fill: parent
+               hoverEnabled: true
+            }
+        }
+
+        Button
+        {
+            id:sklepPunktow
+            height:34
+            width:skleppunktowImage.width
+
+            Image{
+
+            id:skleppunktowImage
+             source:skleppunktowArea.containsMouse?"assets/skleppunktowanimated":"assets/skleppunktow"
+
+            }
+
+            MouseArea
+            {
+               id:skleppunktowArea
+               cursorShape: Qt.PointingHandCursor
+               anchors.fill: parent
+               hoverEnabled: true
+
+
+            }
+        }
+        Button
+        {
+            id:aktualnosci
+            height:34
+            width:aktualnosciImage.width
+
+
+            Image{
+
+            id:aktualnosciImage
+           source:aktualnosciArea.containsMouse?"assets/aktualnoscianimated":"assets/aktualnosci"
+
+            }
+
+            MouseArea
+            {
+               id:aktualnosciArea
+               cursorShape: Qt.PointingHandCursor
+               anchors.fill: parent
+               hoverEnabled: true
+               onClicked:
+               {
+                   var url="https://store.steampowered.com/points/shop/"
+                   Qt.openUrlExternally(url);
+               }
+            }
+        }
+        Button
+        {
+            id:labolatoria
+            height:34
+            width:labImage.width
+
+            Image{
+
+            id:labImage
+            source:labArea.containsMouse?"assets/labanimated":"assets/lab"
+
+            }
+
+            MouseArea
+            {
+               id:labArea
+               cursorShape: Qt.PointingHandCursor
+               anchors.fill: parent
+               hoverEnabled: true
+            }
+        }
+
+        Rectangle
+        {
+            id:emptyrect
+            color:"#1F3140"
+            height:34
+            width:200
+
+        }
+
+
+
+        TextField
+        {
+
+            id:searchbar
+            height:30
+            width:300
+            color:"white"
+            font.pointSize: 10
+            placeholderText:qsTr("szukaj")
+            background:Rectangle
+            {
+            color:"gray"
+            radius:7
+
+            }
+                Button
+                {
+                    id:lupabutton
+                    height:30
+                    width:30
+                    anchors.right: parent.right
+
+                    Image{
+                    id:lupaimage
+                    source:lupamouseArea.containsMouse?"assets/search":"assets/searchanimated"
+                    height:30
+                    width:30
+
+                     }
+                    MouseArea
+                    {
+                        id:lupamouseArea
+                        anchors.fill: parent
+                        hoverEnabled: true
+
+                    }
+                }
+        }
     }
 
+    Button
+    {
+        id:wishlist
+        height:23
+        width:120
+x:1395
+y:90
+
+
+        Rectangle
+        {
+            color:"#1F3140"
+            height:parent.height
+            width:parent.width
+            radius:2
+
+            Text
+            {
+                id:wishlisttext
+                text:"Lista życzeń"
+                color:"white"
+                anchors.centerIn: parent
+            }
+        }
+    }
+
+    //-------------------------------------------------------------------------------------------------
     Text {
   id:recomended
   text:"Wyróżnione i polecane"
@@ -723,7 +932,7 @@ Window {
 
     Rectangle {
         id: lowmid
-        color:"#1D2F40"
+        color:"#1F3140"
         width: parent.width
         anchors.top: event.bottom
     }
@@ -753,13 +962,13 @@ Window {
 
             Image
             {
-                id:viewGames
-                //source:imageModel.get(currentIndex).source
+                id:baldur
                 source:"assets/baldur"
-               // width: 600
-              //  height: 400
-             // x:480
-              // y:550
+            }
+            Image
+            {
+                id:awayout
+                source:"assets/awayout"
             }
         }
 //----------------------------------------------------LEFT SWIPE---------------------------------------------------
@@ -847,16 +1056,44 @@ Image
             font.pixelSize: 13
         }
 
-        Text {
+
+        Button {
             id: friendList
-            text: "Znajomi i czat"
-            color: "gray"
+            height:25
+            width:100
             anchors.right: parent.right
             anchors.top: parent.top
             anchors.topMargin: 20
             anchors.rightMargin: 10
-            font.pixelSize: 13
 
+            background:Rectangle
+            {
+                color:"transparent"
+                border.color:"transparent"
+                height:parent.height
+                width:parent.width
+                anchors.fill: parent
+            }
+            Text
+            {
+                text: "Znajomi i czat +"
+                font.pixelSize: 13
+                color:"gray"
+            }
+
+
+            onClicked: {
+                var friendsWindow=Qt.createComponent("friendsWindow.qml").createObject(null);
+                if(friendsWindow!==null)
+                {
+                    friendsWindow.show();
+                }
+                else
+                {
+                    console.log("failed to load secondary window")
+                }
+            }
         }
+
     }
 }

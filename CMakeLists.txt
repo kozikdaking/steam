@@ -42,6 +42,13 @@ qt_add_qml_module(appsteam
         RESOURCES assets/minimize.png assets/minimizeanimated.png
         RESOURCES assets/maximize.png assets/maximizeanimated.png
         RESOURCES assets/checkall.png assets/checkallanimated.png
+        RESOURCES assets/search.png assets/searchanimated.png
+        RESOURCES assets/twojsklep.png assets/twojsklepanimated.png
+        RESOURCES assets/kategorie.png assets/kategorieanimated.png assets/noweiwarte.png assets/noweiwarteanimated.png
+        RESOURCES assets/aktualnosci.png assets/aktualnoscianimated.png
+        RESOURCES assets/lab.png assets/labanimated.png
+        QML_FILES friendsWindow.qml
+        RESOURCES assets/friendlist.png
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
