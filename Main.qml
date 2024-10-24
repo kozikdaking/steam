@@ -11,6 +11,16 @@ ApplicationWindow {
     color: "#3A6D8C"
     //flags: Qt.FramelessWindowHint
 
+    Loader
+    {
+        id:libraryLoader
+        width:parent.width
+        height:parent.height-(topBar.height+bottomBar.height)
+        anchors.top: topBar.bottom
+        anchors.bottom: bottomBar.top
+        z:1
+    }
+
     //------------------------------------------------TOP------------------------------------------------
 
     Rectangle {
@@ -293,7 +303,7 @@ ApplicationWindow {
         }
     }
 
-    //---------------------------------------------------- IKONY
+    //---------------------------------------------------- BUTTONS -------------------------------------------------------------
     Row {
         spacing: 10
 
@@ -444,7 +454,7 @@ ApplicationWindow {
                         {
                             if(optionName=="Biblioteka")
                             {
-                                Qt.quit()
+                                libraryLoader.source="biblioteka.qml"
                          }
                         }
                       }
@@ -692,8 +702,156 @@ ApplicationWindow {
             }
         }
     }
+//-------------------------------------------------------------------functions------------------------------------------------------------------------------
 
-    //------------------------------------------------EVENT------------------------------------------------
+Row
+{
+    spacing:10
+    anchors.left: parent
+    y:27
+    Button
+    {
+        id:leftarrow
+        height:22
+        width:22
+
+        Image
+        {
+            id:leftarrowimage
+            height:parent.height
+            width:parent.width
+            anchors.fill:parent
+            source:"assets/leftarrow"
+        }
+    }
+
+    Button
+    {
+        id:rightarrow
+        height:22
+        width:22
+
+        Image
+        {
+            id:rightarrowimage
+            height:parent.height
+            width:parent.width
+            anchors.fill:parent
+            source:"assets/rightarrow"
+        }
+    }
+
+    Button
+    {
+        id:shop
+        height:30
+        width:80
+
+        Rectangle
+        {
+            id:shopRect
+            height:parent.height
+            width:parent.width
+            anchors.fill: parent
+            color:"#141c24"
+
+            Text
+            {
+                id:shoptext
+                text:"SKLEP"
+                color:"white"
+                font.pointSize: 15
+                font.bold: true
+                anchors.centerIn: parent
+            }
+        }
+
+    }
+
+    Button
+    {
+        id:biblioteka
+        height:30
+        width:150
+
+        onClicked
+        {
+            libraryLoader.source:"biblioteka.qml"
+        }
+
+        Rectangle
+        {
+            id:bibliotekaRect
+            height:parent.height
+            width:parent.width
+            anchors.fill: parent
+            color:"#141c24"
+
+            Text
+            {
+                id:bibliotekaText
+                text:"BIBLIOTEKA"
+                color:"white"
+                font.pointSize: 15
+                font.bold: true
+                anchors.centerIn: parent
+            }
+        }
+    }
+
+    Button
+    {
+        id:community
+        height:30
+        width:150
+
+        Rectangle
+        {
+            id:communityRect
+            height:parent.height
+            width:parent.width
+            anchors.fill: parent
+            color:"#141c24"
+
+            Text
+            {
+                id:communityText
+                text:"SPOŁECZNOŚĆ"
+                color:"white"
+                font.pointSize: 15
+                font.bold: true
+                anchors.centerIn: parent
+            }
+        }
+    }
+
+    Button
+    {
+        id:yourProfile
+        height:30
+        width:80
+
+        Rectangle
+        {
+            id:yourProfileRect
+            height:parent.height
+            width:parent.width
+            anchors.fill: parent
+            color:"#141c24"
+
+            Text
+            {
+                id:yourProfileText
+                text:"MIGUEL"
+                color:"white"
+                font.pointSize: 15
+                font.bold: true
+                anchors.centerIn: parent
+            }
+        }
+    }
+}
+    //-------------------------------------------------------------------EVENT------------------------------------------------
 
 
 
@@ -932,7 +1090,7 @@ y:90
 
     Rectangle {
         id: lowmid
-        color:"#1F3140"
+        color:"green"
         width: parent.width
         anchors.top: event.bottom
     }
