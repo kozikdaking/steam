@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Window
 import QtQuick.Controls
+import QtQuick.Dialogs
 
 ApplicationWindow {
     id:window
@@ -10,6 +11,8 @@ ApplicationWindow {
     title: qsTr("Steam")
     color: "#3A6D8C"
     //flags: Qt.FramelessWindowHint
+
+
 
     Loader
     {
@@ -774,10 +777,22 @@ Row
         height:30
         width:150
 
-        onClicked
-        {
-            libraryLoader.source:"biblioteka.qml"
-        }
+          MouseArea
+            {
+                id:mouseAreabiblioteka
+                anchors.fill: parent
+                hoverEnabled: true
+                cursorShape:Qt.PointingHandCursor
+
+                onClicked:
+                {
+
+                        libraryLoader.source="biblioteka.qml"
+
+                 }
+
+            }
+
 
         Rectangle
         {
@@ -1203,15 +1218,56 @@ Image
         color: "#141c24"
         anchors.bottom: parent.bottom
 
-        Text {
+
+//----------------------------------------------------ADD GAME------------------------------------------------
+
+        FileDialog
+        {
+            id:addGameDialog
+
+        }
+
+        Button {
             id: addGame
-            text: " + Dodaj gre"
-            color: "gray"
+            height:25
+            width:100
             anchors.left: parent.left
             anchors.top: parent.top
             anchors.topMargin: 20
             anchors.leftMargin: 10
             font.pixelSize: 13
+
+
+
+            Rectangle
+            {
+                id:addGameRect
+                height:parent.height
+                width:parent.width
+                anchors.fill: parent
+                color:"#141c24"
+                border.color:"#141c24"
+
+                Text
+                {
+                    id:addGameText
+                    text:" + Dodaj gre"
+                   color:addGameArea.containsMouse?"white":"gray"
+                }
+            }
+
+            MouseArea
+            {
+                id:addGameArea
+                cursorShape: Qt.PointingHandCursor
+                anchors.fill: parent
+                hoverEnabled: true
+
+                onClicked:
+                {
+                   addGameDialog.open()
+                }
+            }
         }
 
 
@@ -1224,10 +1280,10 @@ Image
             anchors.topMargin: 20
             anchors.rightMargin: 10
 
-            background:Rectangle
+           Rectangle
             {
-                color:"transparent"
-                border.color:"transparent"
+                color:"#141c24"
+                border.color:"#141c24"
                 height:parent.height
                 width:parent.width
                 anchors.fill: parent
@@ -1236,21 +1292,29 @@ Image
             {
                 text: "Znajomi i czat +"
                 font.pixelSize: 13
-                color:"gray"
+                color:friendsListArea.containsMouse?"white":"gray"
+            }
+
+            MouseArea
+            {
+                id:friendsListArea
+                cursorShape: Qt.PointingHandCursor
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: {
+                    var friendsWindow=Qt.createComponent("friendsWindow.qml").createObject(null);
+                    if(friendsWindow!==null)
+                    {
+                        friendsWindow.show();
+                    }
+                    else
+                    {
+                        console.log("failed to load secondary window")
+                    }
+                }
             }
 
 
-            onClicked: {
-                var friendsWindow=Qt.createComponent("friendsWindow.qml").createObject(null);
-                if(friendsWindow!==null)
-                {
-                    friendsWindow.show();
-                }
-                else
-                {
-                    console.log("failed to load secondary window")
-                }
-            }
         }
 
     }
