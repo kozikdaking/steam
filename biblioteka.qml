@@ -64,12 +64,6 @@ Rectangle {
                         anchors.leftMargin: 5
 
 
-                        ListView
-                        {
-                        id:gryiprogramyList
-                        height:200
-                        width:parent.width
-
                         model:ListModel
                         {
                             ListElement{ optionName:"Gry"}
@@ -77,7 +71,7 @@ Rectangle {
                             ListElement{optionName:"Gry"}
                         }
 
-                        }
+
 
                    background:  Rectangle
                     {
@@ -85,12 +79,13 @@ Rectangle {
                         width:parent.width
                         color:"gray"
                         anchors.fill:parent
-                        Text{
-                        text:"Gry i programy"
+
+                        Text
+                        {
                         color:"white"
                         anchors.fill:parent
 
-                            }
+                         }
                     }
              }
 
@@ -127,7 +122,19 @@ Rectangle {
                 anchors.top: stronaglowna.bottom
                 anchors.topMargin: 150
                 color:"darkgray"
-            }
 
+                Column
+                {
+                    width:parent.width
+                    height:parent.height
+                    anchors.top:parent
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.topMargin: 10
+                    spacing:5
+
+
+                }
+            }
+    //------------------------------------------------------------------ADD GAME----------------------------------
     }
 }

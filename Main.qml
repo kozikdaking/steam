@@ -12,6 +12,16 @@ ApplicationWindow {
     color: "#3A6D8C"
     //flags: Qt.FramelessWindowHint
 
+    Loader
+    {
+        id:mainLoader
+        width:parent.width
+        height:parent.height-(topBar.height+bottomBar.height)
+        anchors.top: topBar.bottom
+        anchors.bottom: bottomBar.top
+        z:1
+
+    }
 
 
     Loader
@@ -309,13 +319,26 @@ ApplicationWindow {
     //---------------------------------------------------- BUTTONS -------------------------------------------------------------
     Row {
         spacing: 10
+        anchors.left: parent.left
+        anchors.top:parent.top
+        anchors.topMargin: 5
+        anchors.leftMargin: 10
 
         Button {
             id: steam
-            text:"Steam"
-            font.pointSize: 10
             background: null
+            height:30
+            width:40
             onClicked: settingsPopup.open()
+
+            Text
+            {
+                id:steamtext
+                text:"Steam"
+                color:"white"
+                font.pointSize: 10
+                anchors.centerIn: steam.parent
+            }
 
             Popup {
                 id: settingsPopup
@@ -386,12 +409,21 @@ ApplicationWindow {
 
         Button
         {
-            id:wyswietl
-            text:"Wyswietl"
+            id:wyswietl       
             background: null
             font.pointSize: 10
-            onClicked: wyswietlPopup.open()
+            height:30
+            width:60
 
+            onClicked: wyswietlPopup.open()
+            Text
+            {
+                id:wyswietltext
+                text:"Wyswietl"
+                color:"white"
+                font.pointSize: 10
+                anchors.centerIn: wyswietl.parent
+            }
             Popup
             {
                 id:wyswietlPopup
@@ -470,11 +502,20 @@ ApplicationWindow {
 
         Button {
             id: friends
-            text: "Znajomi"
             background: null
             font.pointSize: 10
             onClicked: friendspopup.open()
+            height:30
+            width:60
 
+                Text
+                {
+                    id:friendstext
+                    text:"Znajomi"
+                    color:"white"
+                    font.pointSize: 10
+                    anchors.centerIn: friends.parent
+                }
             Popup
             {
                 id:friendspopup
@@ -547,15 +588,23 @@ ApplicationWindow {
 
         Button {
             id: games
-            text: "Gry"
             font.pointSize: 10
             background: null
-
+            height:30
+            width:40
             onClicked:
             {
                 gamesPopUp.open()
             }
 
+            Text
+            {
+                id:gamestext
+                text:"Gry"
+                color:"white"
+                font.pointSize: 10
+                anchors.centerIn: games.parent
+            }
             Popup
             {
                 id:gamesPopUp
@@ -629,15 +678,23 @@ ApplicationWindow {
                                                 }
         Button {
             id: help
-            text: "Pomoc"
             font.pointSize: 10
             background: null
+            height:30
+            width:45
 
             onClicked:
             {
                 helpPopUp.open()
             }
-
+            Text
+            {
+                id:helpstext
+                text:"Pomoc"
+                color:"white"
+                font.pointSize: 10
+                anchors.centerIn: help.parent
+            }
             Popup
             {
                 id:helpPopUp
@@ -717,7 +774,17 @@ Row
         id:leftarrow
         height:22
         width:22
-
+        MouseArea
+          {
+              id:mouseAreableftarrow
+              anchors.fill: parent
+              hoverEnabled: true
+              cursorShape:Qt.PointingHandCursor
+        onClicked:
+        {
+           mainLoader.source="Main.qml"
+        }
+          }
         Image
         {
             id:leftarrowimage
@@ -725,6 +792,8 @@ Row
             width:parent.width
             anchors.fill:parent
             source:"assets/leftarrow"
+
+
         }
     }
 
@@ -1158,13 +1227,7 @@ Image
     source:leftswipemousearea.containsMouse?"assets/leftswipeanimation":"assets/leftswipe"
 }
                 onClicked: {
-                    console.log("12")
-                   if( view.currentIndex>0)
-                    {
-                        view.currentIndex-=1;
-                       displayImage.source = imageModel.get(currentIndex).imageSource;
 
-                    }
                 }
                 MouseArea
                 {
@@ -1192,12 +1255,8 @@ Image
                 onClicked:
                 {
                     onClicked: {
-                         console.log("52")
-                                if (view.currentIndex < view.count - 1) {
-                                    view.currentIndex += 1;
-                                    displayImage.source = imageModel.get(currentIndex).imageSource;
-                                }
-                    }
+
+                                 }
                 }
                 MouseArea
                 {
@@ -1220,12 +1279,17 @@ Image
 
 
 //----------------------------------------------------ADD GAME------------------------------------------------
+property var fileList: []
 
         FileDialog
         {
             id:addGameDialog
-
+            title: "Wybierz plik"
+                    onAccepted: {
+                        // Dodaj ścieżkę do pliku do listy po wybraniu pliku
+                        fileList.push(fileUrl)
         }
+   }
 
         Button {
             id: addGame
